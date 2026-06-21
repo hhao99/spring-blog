@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: blog
+  datasource:
+    url: jdbc:sqlite:mydb.db
+    driver-class-name: org.sqlite.JDBC 
+    username: sa
+    password: sa
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properites:
+      hibernate:
+        format_sql: true
