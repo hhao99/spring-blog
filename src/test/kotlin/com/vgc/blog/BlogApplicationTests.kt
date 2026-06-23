@@ -1,10 +1,10 @@
-package com.vgc.b2
+package com.vgc.blog
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class B2ApplicationTests {
+class BlogApplicationTests {
 
 	@Test
 	fun contextLoads() {
