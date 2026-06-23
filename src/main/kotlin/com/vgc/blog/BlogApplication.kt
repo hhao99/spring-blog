@@ -6,24 +6,29 @@ import org.springframework.boot.runApplication
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
 
-import com.vgc.blog.models.Article
-import com.vgc.blog.repositories.ArticleRepository
+import com.vgc.blog.models.*
+import com.vgc.blog.repositories.*
 
 @SpringBootApplication
 class BlogApplication {
 
 	@Bean
-	fun demo( repo: ArticleRepository) = CommandLineRunner {
+	fun demo( 
+			articleRepo: ArticleRepository,
+			authorRepo: AuthorRepository,
+			commentRepo: CommentRepository
+			) = CommandLineRunner {
 
+		val author = authorRepo.save(
+			Author(username="eric", email="hhao99@gmail.com")
+		)
 		// article sample data
-		repo.save( Article(title="first article", content="no content"))
-		repo.save( Article(title="second article", content="no content"))
-		repo.save( Article(title="learing spring article", content="no content"))
-
+		val article = Article(author=author,title="test article", content="test content")
+		articleRepo.save(article)
 		// findall Articles
-		val articles = repo.findAll()
+		val articles = articleRepo.findAll()
 		articles.forEach{ article -> println("Article: id=${article.id}, title=${article.title}") }
-
+		
 	}
 }
 

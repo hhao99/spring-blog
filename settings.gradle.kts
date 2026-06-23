@@ -1,1 +1,1 @@
-rootProject.name = "b2"
+rootProject.name = "spring-blog"
