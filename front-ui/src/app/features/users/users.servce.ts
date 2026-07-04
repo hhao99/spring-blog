@@ -7,6 +7,10 @@ export interface User {
   login: string;
   email: string;
 }
+export interface NewUser {
+    login: string
+    email: string
+}
 export interface UserState {
   list: User[];
   loading: boolean;
@@ -41,4 +45,32 @@ export class UserStore {
       }
     }); 
   }
-}   
+
+  deleteUser(userId: number): void {
+    this.http.delete(`${this.apiUrl}/${userId}`).subscribe({
+      next: () => {
+        this.state.update(state => ({
+          ...state,
+          list: state.list.filter(user => user.id !== userId)
+        }));
+      },
+      error: (err) => {
+        this.state.update(state => ({ ...state, error: err.message }));
+      }
+    });
+  }
+  createUser(newUser: NewUser) {
+    this.http.post<User>(`${this.apiUrl}`, newUser).subscribe({
+        next: (savedUser) => {
+            this.state.update( pre => ({
+                ...pre,
+                list: [...pre.list, savedUser!],
+                loading: false, 
+            }))
+        },
+        error: (err) => {
+            this.state.update( pre => ({...pre, error: "failed to save user!"}) )
+        }
+    })
+  }
+}

@@ -5,11 +5,22 @@ import { UserApp } from './features/users';
   selector: 'app-root',
   imports: [RouterOutlet, UserApp],
   template: `
-    <user-app />
-    <hr />
-    <router-outlet />
+    <div class="flex flex-col  min-h-screen bg-gray-50 text-gray-800">
+      <header class="container mx-auto flex justify-between items-center">
+        <span class="text-xl text-red-800">User Demo app </span>
+        <nav class="flex gap-4">
+          <a href="/">Home</a>
+          <a href="/new">new_user</a>
+</nav>
+</header>
+<main class="container grow mx-auto p-2">
+  <router-outlet />
+</main>
+<footer class="flex justify-center items-center min-h-10 bg-gray-50">
+  <h3>&copy; Copyright by Eric @ 2026</h3>
+</footer>
+    </div>
   `
 })
 export class App {
-  protected readonly title = signal('front-ui');
 }
