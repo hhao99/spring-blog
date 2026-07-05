@@ -1,16 +1,15 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { UserApp } from './features/users';
+import { RouterOutlet, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, UserApp],
+  imports: [RouterOutlet, RouterLink],
   template: `
     <div class="flex flex-col  min-h-screen bg-gray-50 text-gray-800">
       <header class="container mx-auto flex justify-between items-center">
         <span class="text-xl text-red-800">User Demo app </span>
         <nav class="flex gap-4">
-          <a href="/">Home</a>
-          <a href="/new">new_user</a>
+          <a routerLink="/">Home</a>
+          <a routerLink="/new">new_user</a>
 </nav>
 </header>
 <main class="container grow mx-auto p-2">
