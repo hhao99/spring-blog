@@ -1,0 +1,31 @@
+<div>
+    <h3>User list</h3>
+    <div>
+    @if(users.hasValue()) {
+        <ul class="w-full flex flex-col">
+        @for( user of users.value(); track  user.id) {
+           @if(this.isEditing() && this.editUserId() === user.id) {
+            <li>
+                <edit-user [user]="user" />
+            </li>
+           }
+           @else {
+            <li class="flex justify-between">
+                <user-item [user]="user" />
+                <a (click)="this.isEditing.set(true);this.editUserId.set(user.id)">edit</a>
+                <a [routerLink]="['usr',user.id]">detail</a>
+            </li>
+           }
+        }
+        </ul>
+    }
+    @else {
+        @if(users.isLoading()) {
+            <h3>Loading...</h3>
+        }
+        @if(users.error()) {
+            <h3>Faile to loading the users: {{users.error()!.cause}}</h3>
+        }  
+    }
+    </div>
+</div>

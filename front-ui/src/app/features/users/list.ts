@@ -1,38 +1,20 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { UserStore } from './users.servce';
+import { Component, inject, signal } from '@angular/core';
+import { UserStore } from './service';
 import { RouterLink } from '@angular/router'
+import { EditUser } from './edit'
+import { UserItem } from './item'
 
-import { User } from './users.servce';
+import { User } from './service';
 @Component({
   selector: 'user-list',
-  imports: [RouterLink],
-  template: `
-  <div>
-    <h2>Users List</h2>
-    <ul>
-      @for( user of userStore.users(); track user.id) {
-        <a [routerLink]="['/user',user.id]">
-        <li class='w-full mx-auto flex justify-between'>
-          <span>{{user.login}}</span>
-          <span>{{user.email}}</span>
-      
-        </li>
-      </a>
-      } @empty {
-        @if(userStore.loading()) {
-          <li>Loading users...</li>
-        } @else {
-          <li>No users found.</li>
-        }
-      }
-    </ul>
-  </div>
-  `
+  imports: [RouterLink, EditUser, UserItem],
+  templateUrl: './list.html'
 })
-export class UserList implements OnInit {
+export class UserList {
   readonly userStore = inject(UserStore);
+  users = this.userStore.users!
+  isEditing = signal(false)
+  editUserId = signal(0)
 
-  ngOnInit(): void {
-    this.userStore.fetchUsers();
-  }
+  
 }

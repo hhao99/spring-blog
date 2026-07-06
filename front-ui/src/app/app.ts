@@ -1,17 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { Component,  } from '@angular/core';
+import { RouterOutlet,  } from '@angular/router';
+
+import { Header } from './header'
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, Header],
   template: `
     <div class="flex flex-col  min-h-screen bg-gray-50 text-gray-800">
-      <header class="container mx-auto flex justify-between items-center">
-        <span class="text-xl text-red-800">User Demo app </span>
-        <nav class="flex gap-4">
-          <a routerLink="/">Home</a>
-          <a routerLink="/new">new_user</a>
-</nav>
-</header>
+      <app-header title="User Demo app" />
 <main class="container grow mx-auto p-2">
   <router-outlet />
 </main>
